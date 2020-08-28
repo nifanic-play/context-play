@@ -1,0 +1,6 @@
+{
+  "proseWrap": "never",
+  "printWidth": 100,
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css"
+}
