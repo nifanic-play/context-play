@@ -75,7 +75,4 @@ export const useAppContextDispatch = () => {
   return context;
 };
 
-export const useAppContext = (): [AppState, Dispatch<AppContextActions>] => [
-  useAppContextState(),
-  useAppContextDispatch(),
-];
+export const useAppContext = () => [useAppContextState(), useAppContextDispatch()] as const;
