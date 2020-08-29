@@ -3,7 +3,6 @@ import { compact, isEqual } from "lodash";
 import { AppContextActionType, useAppContext } from "../context";
 
 const docTitle: string = "Services";
-let initialTitles: string[] = [];
 
 export const Services: React.FC = () => {
   const { SET_DOC } = AppContextActionType;
@@ -12,40 +11,14 @@ export const Services: React.FC = () => {
     doc: { titles },
   } = state;
 
-  const setDocTitles = () => {
-    /**
-     * On mount, preserve `initialTitles`, which will reset context on unmount.
-     */
-    if (!initialTitles.length) initialTitles = [...titles];
-
-    const mergedTitles = compact([...initialTitles, docTitle]);
-
-    if (!isEqual(mergedTitles, titles)) {
-      dispatch({
-        type: SET_DOC,
-        payload: {
-          titles: mergedTitles,
-        },
-      });
-    }
-
-    return () => {
-      if (isEqual(initialTitles, titles)) return;
-
-      dispatch({
-        type: SET_DOC,
-        payload: {
-          titles: initialTitles,
-        },
-      });
-    };
-  };
-
   useEffect(() => {
-    const resetDocTitles = setDocTitles();
-
-    return resetDocTitles;
-  },[]);
+    dispatch({
+      type: SET_DOC,
+      payload: {
+        titles: ["root","Services"],
+      },
+    });
+  }, []);
 
   return (
     <>

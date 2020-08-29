@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import { compact, isEqual } from "lodash";
 import { AppContextActionType, useAppContext } from "../context";
 
 const docTitle: string = "Home";
-let initialTitles: string[] = [];
 
 export const Home: React.FC = () => {
   const { SET_DOC } = AppContextActionType;
@@ -12,43 +10,25 @@ export const Home: React.FC = () => {
     doc: { titles },
   } = state;
 
-  const setDocTitles = () => {
-    /**
-     * On mount, preserve `initialTitles`, which will reset context on unmount.
-     */
-    if (!initialTitles.length) initialTitles = [...titles];
-
-    const mergedTitles = compact([...initialTitles, docTitle]);
-
-    if (!isEqual(mergedTitles, titles)) {
-      dispatch({
-        type: SET_DOC,
-        payload: {
-          titles: mergedTitles,
-        },
-      });
-    }
-
-    return () => {
-      if (isEqual(initialTitles, titles)) return;
-
-      dispatch({
-        type: SET_DOC,
-        payload: {
-          titles: initialTitles,
-        },
-      });
-    };
-  };
-
   useEffect(() => {
-    const resetDocTitles = setDocTitles();
-
-    return resetDocTitles;
+    dispatch({
+      type: SET_DOC,
+      payload: {
+        titles: ["root","Home"],
+      },
+    });
   },[]);
+
+  interface Foo { bar:number, zomg: string};
+
+  const foos:Foo[] = [];
+
+
+
 
   return (
     <>
+      {foos.map(({bar,zomg})=><li key={bar}>{zomg}</li>)}
       <h2>Home</h2>
       <div>
         <div>
