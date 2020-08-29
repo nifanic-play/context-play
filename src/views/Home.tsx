@@ -45,7 +45,7 @@ export const Home: React.FC = () => {
     const resetDocTitles = setDocTitles();
 
     return resetDocTitles;
-  });
+  },[]);
 
   return (
     <>

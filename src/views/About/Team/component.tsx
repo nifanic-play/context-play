@@ -44,8 +44,8 @@ export const Team: React.FC = () => {
   useEffect(() => {
     const resetDocTitles = setDocTitles();
 
-    return () => resetDocTitles();
-  });
+    return resetDocTitles;
+  }, []);
 
   return (
     <>

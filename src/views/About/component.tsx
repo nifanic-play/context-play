@@ -46,7 +46,7 @@ export const About: React.FC = () => {
     const resetDocTitles = setDocTitles();
 
     return () => resetDocTitles();
-  });
+  },[]);
 
   return (
     <>
