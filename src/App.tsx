@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { AppContextProvider } from "./context";
 import { About, Home, NoMatch, Services, Team } from "./views";
 import { Navigation } from "./components";
 
-export const App: React.FC = () => {
+export const App: FC = () => {
   const history = createBrowserHistory();
 
   return (
