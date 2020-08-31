@@ -24,10 +24,8 @@ const hierarchy = (items: ViewShape[], parentTo: string | undefined = "") => {
     <ol>
       {items.reduce<JSX.Element[]>((acc, { to, label, elements }, i) => {
         const item = (
-          <li>
-            <NavLink to={`${parentTo}${to}`} key={`${label}-${i}`}>
-              {label}
-            </NavLink>
+          <li key={`${label}-${i}`}>
+            <NavLink to={`${parentTo}${to}`}>{label}</NavLink>
             {elements?.length && hierarchy(elements, to)}
           </li>
         );

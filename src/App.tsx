@@ -5,8 +5,6 @@ import { AppContextProvider } from "./context";
 import { About, Home, NoMatch, Services } from "./views";
 import { Navigation } from "./components";
 
-const docTitle: string = "app";
-
 export const App: FC = () => {
   const history = createBrowserHistory();
 
