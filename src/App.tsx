@@ -1,12 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { AppContextProvider } from "./context";
-import { About, Home, NoMatch, Services, Team } from "./views";
+import { About, Home, NoMatch, Services } from "./views";
 import { Navigation } from "./components";
+
+const docTitle: string = "app";
 
 export const App: FC = () => {
   const history = createBrowserHistory();
+
+  useEffect(() => {
+    console.log("App mounted");
+  }, []);
 
   return (
     <AppContextProvider>
@@ -16,9 +22,8 @@ export const App: FC = () => {
         </div>
         <Switch>
           <Route path="/" component={Home} strict exact />
-          <Route path="/services" component={Services} strict exact />
-          <Route path="/about" component={About} strict exact />
-          <Route path="/about/team" component={Team} strict exact />
+          <Route path="/services" component={Services} strict />
+          <Route path="/about" component={About} strict />
           <Route component={NoMatch} />
         </Switch>
       </Router>

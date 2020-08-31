@@ -1,38 +1,14 @@
-import React, { useEffect } from "react";
-import { compact, isEqual } from "lodash";
-import { AppContextActionType, useAppContext } from "../context";
+import React, { FC } from "react";
+import { DocTitles } from "../context";
+import { Body, DocTitle } from "../components";
 
-const docTitle: string = "Services";
+const docTitles: DocTitles = ["Services", "UX"];
 
-export const Services: React.FC = () => {
-  const { SET_DOC } = AppContextActionType;
-  const [state, dispatch] = useAppContext();
-  const {
-    doc: { titles },
-  } = state;
-
-  useEffect(() => {
-    dispatch({
-      type: SET_DOC,
-      payload: {
-        titles: ["root","Services"],
-      },
-    });
-  }, []);
-
+export const Services: FC = () => {
   return (
     <>
-      <h2>Services</h2>
-      <div>
-        <div>
-          <h4>Expected</h4>
-          <code>titles: ["root","Services"]</code>
-        </div>
-        <div>
-          <h4>Actual</h4>
-          <code>titles: {JSON.stringify(titles)}</code>
-        </div>
-      </div>
+      <DocTitle titles={docTitles} />
+      <Body header="Services" docTitles={docTitles} />
     </>
   );
 };

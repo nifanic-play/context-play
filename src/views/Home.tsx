@@ -1,45 +1,15 @@
-import React, { useEffect } from "react";
-import { AppContextActionType, useAppContext } from "../context";
+import React, { FC, useEffect } from "react";
+import { Body, DocTitle } from "../components";
 
-const docTitle: string = "Home";
-
-export const Home: React.FC = () => {
-  const { SET_DOC } = AppContextActionType;
-  const [state, dispatch] = useAppContext();
-  const {
-    doc: { titles },
-  } = state;
-
+export const Home: FC = () => {
   useEffect(() => {
-    dispatch({
-      type: SET_DOC,
-      payload: {
-        titles: ["root","Home"],
-      },
-    });
-  },[]);
-
-  interface Foo { bar:number, zomg: string};
-
-  const foos:Foo[] = [];
-
-
-
+    console.log("Home mounted");
+  }, []);
 
   return (
     <>
-      {foos.map(({bar,zomg})=><li key={bar}>{zomg}</li>)}
-      <h2>Home</h2>
-      <div>
-        <div>
-          <h4>Expected</h4>
-          <code>titles: ["root","Home"]</code>
-        </div>
-        <div>
-          <h4>Actual</h4>
-          <code>titles: {JSON.stringify(titles)}</code>
-        </div>
-      </div>
+      <DocTitle />
+      <Body header="Home" />
     </>
   );
 };

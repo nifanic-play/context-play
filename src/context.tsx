@@ -1,11 +1,13 @@
 import React, { createContext, Dispatch, Reducer, useContext, useReducer } from "react";
 
+export type DocTitles = string[];
+
 export interface AppStateDoc {
   title: string;
-  titles: string[];
+  titles: DocTitles;
 }
 
-type AppStatePayloads = AppStateDoc;
+type AppStatePayloads = AppStateDoc | DocTitles;
 
 export interface AppState {
   doc: AppStateDoc;
@@ -21,18 +23,19 @@ export const initialAppContext: AppState = {
 };
 
 export enum AppContextActionType {
-  SET_DOC = "SET_DOC",
+  ADD_TITLES = "ADD_TITLES",
+  REMOVE_TITLES = "REMOVE_TITLES",
 }
 
-const { SET_DOC } = AppContextActionType;
+const { ADD_TITLES, REMOVE_TITLES } = AppContextActionType;
 
 interface Action<T extends AppContextActionType, P extends AppStatePayloads> {
   type: T;
-  payload: Partial<P>;
+  payload: P;
 }
 
-type SetDocAction = Action<typeof SET_DOC, AppStateDoc>;
-export type AppContextActions = SetDocAction;
+type UpdateTitles = Action<typeof ADD_TITLES | typeof REMOVE_TITLES, DocTitles>;
+export type AppContextActions = UpdateTitles;
 
 export const ContextState = createContext<AppState | undefined>(undefined);
 ContextState.displayName = "AppContextState";
@@ -42,8 +45,19 @@ ContextDispatch.displayName = "AppContextDispatch";
 
 const AppContextReducer: Reducer<AppState, AppContextActions> = (state, action): AppState => {
   switch (action.type) {
-    case SET_DOC:
-      return { ...state, doc: { ...state.doc, ...action.payload } };
+    case ADD_TITLES:
+      return {
+        doc: { ...state.doc, titles: [...state.doc.titles, ...action.payload!] },
+      };
+    case REMOVE_TITLES:
+      const { length } = action.payload;
+
+      state.doc.titles.splice(-length, length);
+      action.payload = [];
+
+      return {
+        doc: { ...state.doc, titles: state.doc.titles },
+      };
     default:
       return state;
   }

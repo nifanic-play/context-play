@@ -1,41 +1,34 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { AppContextActionType, useAppContext } from "../../context";
+import React, { FC, useEffect } from "react";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { DocTitles } from "../../context";
+import { Body, DocTitle } from "../../components";
+import { Team } from "./Team";
+import { NoMatch } from "../NoMatch";
 
-const docTitle: string = "About";
+const docTitles: DocTitles = ["About"];
 
-export const About: React.FC = () => {
-  const { SET_DOC } = AppContextActionType;
-  const [state, dispatch] = useAppContext();
-  const {
-    doc: { titles },
-  } = state;
+export const About: FC = () => {
+  const { url } = useRouteMatch();
 
   useEffect(() => {
-    dispatch({
-      type: SET_DOC,
-      payload: {
-        titles: ["root","About"],
-      },
-    });
-  },[]);
+    console.log("About mounted");
+  }, []);
 
   return (
     <>
-      <h2>About</h2>
-      <div>
-        <div>
-          <h4>Expected</h4>
-          <code>titles: ["root","About"]</code>
-        </div>
-        <div>
-          <h4>Actual</h4>
-          <code>titles: {JSON.stringify(titles)}</code>
-        </div>
-      </div>
-      <p>
-        Visit the <Link to="/about/team">Team</Link> page.
-      </p>
+      <DocTitle titles={docTitles} />
+      <Switch>
+        <Route path={`${url}`} exact>
+          <Body header="About" docTitles={docTitles} />
+          <p>
+            Visit the <Link to="/about/team">Team</Link> page.
+          </p>
+        </Route>
+        <Route path={`${url}/team`} exact>
+          <Team />
+        </Route>
+        <Route component={NoMatch} />
+      </Switch>
     </>
   );
 };
