@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hierarchy() renders correctly nested \`ol\` navigation elements. 1`] = `
+<ol>
+  <li>
+    <a
+      aria-current="page"
+      className="active"
+      href="/"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      Home
+    </a>
+  </li>
+  <li>
+    <a
+      aria-current={null}
+      href="/services"
+      onClick={[Function]}
+    >
+      Services
+    </a>
+  </li>
+  <li>
+    <a
+      aria-current={null}
+      href="/about"
+      onClick={[Function]}
+    >
+      About
+    </a>
+    <ol>
+      <li>
+        <a
+          aria-current={null}
+          href="/about/team"
+          onClick={[Function]}
+        >
+          Team
+        </a>
+        <ol>
+          <li>
+            <a
+              aria-current={null}
+              href="/about/team/amir"
+              onClick={[Function]}
+            >
+              Amir
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current={null}
+              href="/about/team/nick"
+              onClick={[Function]}
+            >
+              Nick
+            </a>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+`;

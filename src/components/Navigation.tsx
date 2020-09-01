@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 
 export enum LABEL {
@@ -14,7 +14,7 @@ export interface ViewShape {
   elements?: ViewShape[];
 }
 
-export const Navigation: React.FC = () => hierarchy(views);
+export const Navigation: FC = () => hierarchy(views);
 
 const { ABOUT, HOME, SERVICES, TEAM } = LABEL;
 
@@ -57,7 +57,7 @@ export const getElementsByLabel = (label: LABEL, elements: ViewShape[] = views):
  */
 const historyTo: string[] = [];
 
-const hierarchy = (items: ViewShape[], parentTo: string | undefined = "") => {
+export const hierarchy = (items: ViewShape[], parentTo: string | undefined = "") => {
   if (!items || !items.length) return <div>Items are required to build hierarchy</div>;
 
   return (
