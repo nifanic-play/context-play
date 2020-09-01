@@ -24,7 +24,7 @@ export const About: FC = () => {
             Visit the <Link to="/about/team">Team</Link> page.
           </p>
         </Route>
-        <Route path={`${url}/team`} exact>
+        <Route path={`${url}/team`} strict>
           <Team />
         </Route>
         <Route component={NoMatch} />
