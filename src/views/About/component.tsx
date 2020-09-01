@@ -11,7 +11,11 @@ export const About: FC = () => {
   const { url } = useRouteMatch();
 
   useEffect(() => {
-    console.log("About mounted");
+    console.log("<About> mounted");
+
+    return ()=>{
+      console.log("<About> unmounted");
+    }
   }, []);
 
   return (

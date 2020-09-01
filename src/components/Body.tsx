@@ -23,7 +23,7 @@ export const Body: FC<BodyProps> = (props) => {
           <code>titles: {JSON.stringify(compact(["root", ...parentDocTitles, ...docTitles]))}</code>
         </div>
         <div>
-          <h4>Actual</h4>
+          <h4>Context Value</h4>
           <code>titles: {JSON.stringify(titles)}</code>
         </div>
       </div>

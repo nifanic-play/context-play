@@ -18,7 +18,11 @@ export const TeamMember: FC = () => {
   const docTitles: DocTitles = [memberName];
 
   useEffect(() => {
-    console.log(`About/Team/${memberName} mounted`);
+    console.log(`<About/Team/${memberName}> mounted`);
+
+    return () => {
+      console.log(`<About/Team/${memberName}> mounted`);
+    }
   }, [memberName]);
 
   return (
