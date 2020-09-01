@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { AppContextActionType, DocTitles, useAppContextDispatch } from "../context";
+import { FC, useEffect } from "react";
+import { AppContextActionType, DocTitles, useAppContext } from "../context";
 
 interface DocTitleProps {
   titles?: DocTitles;
@@ -9,10 +9,18 @@ const { ADD_TITLES, REMOVE_TITLES } = AppContextActionType;
 
 export const DocTitle: FC<DocTitleProps> = (props) => {
   const { titles: payload } = props;
-  const dispatch = useAppContextDispatch();
+  const [
+    {
+      doc: { titles },
+    },
+    dispatch,
+  ] = useAppContext();
 
   useEffect(() => {
+    document.title = [...titles].reverse().join(" / ");
+  });
 
+  useEffect(() => {
     const setDocTitles = () => {
       if (!payload?.length) return;
 
@@ -32,5 +40,5 @@ export const DocTitle: FC<DocTitleProps> = (props) => {
     return setDocTitles();
   }, [dispatch, payload]);
 
-  return <></>;
+  return null;
 };
